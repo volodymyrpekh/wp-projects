@@ -1,0 +1,170 @@
+@font-face {
+    font-family: Ionicons;
+    src: url(../../themes/carify/fonts/ionicons.eot?v=2.0.0);
+    src: url(../../themes/carify/fonts/ionicons.eot?v=2.0.0#iefix) format("embedded-opentype"), 
+		url(../../themes/carify/fonts/ionicons.ttf?v=2.0.0) format("truetype"), 
+		url(../../themes/carify/fonts/ionicons.woff?v=2.0.0) format("woff"), 
+		url(../../themes/carify/fonts/ionicons.svg?v=2.0.0#Ionicons) format("svg");
+    font-weight: 400;
+    font-style: normal
+}
+.tab-wrapper {
+    display: none;
+    width: 100%;
+    border: 1px solid #e9edf2;
+    padding: 30px 10px 30px;
+    margin: 0 0 30px;
+    opacity: 0;
+    clear: both;
+    position: relative;
+}
+
+.tab-wrapper::after {
+    display: table;
+    content: '';
+    clear: both;
+}
+
+.tab-wrapper.active {
+    display: block;
+    border-top: 0 none;
+}
+
+div[id*="c_tab"],div[id*="c_all"] {
+    display: block;
+    margin: 5px 0 0!important;
+    padding: 0.5em;
+    border-radius: 7px;
+    border: 1px solid #e9edf2;
+}
+
+div[id*="c_tab"]::before,div[id*="c_all"]::before {
+    font-family: Ionicons;
+    content: '\f48a';
+    padding-right: 5px;
+    vertical-align: middle;
+    font-size: 24px;
+    line-height: normal;
+}
+
+div[id*="c_all"]::before {
+    vertical-align: sub;
+    font-size: 24px;
+    line-height: 40px;
+}
+
+div[id*="c_tab"].active,div[id*="c_all"].active {
+    border-bottom: 0 none;
+    border-radius: 7px 7px 0 0;
+}
+
+div[id*="c_tab"].active::before,div[id*="c_all"].active::before {
+    content: '\f463';
+}
+
+div[id*="c_tab"].last {
+    margin-bottom: 30px!important;
+}
+
+div[id*="c_tab"].last.active {
+    margin-bottom: 0px!important;
+}
+
+div[id*="c_tab"] small,div[id*="c_all"] small {
+    font-size: 13px;
+}
+
+div[id*="c_all"],div[id*="c_all"].active {
+    border-left: 0 none;
+    border-right: 0 none;
+    border-bottom: 0 none;
+    border-radius: 0;
+    cursor: pointer;
+}
+
+.clearAll {
+    display: block;
+    border: 1px solid #3396d1;
+    padding: 5px 10px 5px;
+    border-radius: 4px;
+    background-color: #fff;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.clearAll:hover {
+    background-color: #3396d1;
+    color: #fff;
+    -webkit-transition: all .15s ease-in;
+    -moz-transition: all .15s ease-in;
+    -ms-transition: all .15s ease-in;
+    -o-transition: all .15s ease-in;
+    transition: all .15s ease-in;
+}
+
+.tab-wrapper fieldset {
+    min-height: 70px!important;
+}
+
+.tab-wrapper fieldset.radiofields {
+    min-height: 155px!important;
+}
+
+#submit-job-form.job-manager-form fieldset[class*="child_openings"] label {
+    display: block;
+    min-height: 10px;
+}
+
+.tab-wrapper .select, .tab-wrapper input[type=text]{
+	width:90%
+}
+.tab-wrapper fieldset {
+    width: 33.33%;
+    float: left;
+}
+
+.tab-wrapper fieldset select {
+    width: 100%;
+}
+
+.tab-wrapper+fieldset {
+    padding-top: 30px!important;
+    border-top: 1px solid #e9edf2;
+}
+table#spaces {
+    border-width: 0px;
+    margin-bottom: 0px;
+}
+
+table#spaces th {
+    border-width: 0px;
+}
+
+table#spaces td {
+    border-width: 0px;
+    box-shadow: inset 0px -1px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 990px) {
+	.tab-wrapper fieldset {
+		width: 100%;
+		float: left;
+	}
+    table#spaces thead {
+        display:none;
+    }
+
+    table#spaces tbody td {
+        display: block;
+        padding: .6rem;
+    }
+
+    table#spaces tbody td:before {
+        content: attr(data-th);
+        font-weight: bold;
+        display: inline-block;
+        width: 6rem;
+    }
+}
