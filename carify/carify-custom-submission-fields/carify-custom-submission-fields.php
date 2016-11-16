@@ -3,7 +3,7 @@
   Plugin Name: Carify CP Custom Field Types
   Plugin URI: 
   Description: This plugin creates additional custom fields for available spaces in submission form
-  Version: 1.0.0
+  Version: 1.0.1
   Author: Vlad Pekh
   Author URI: http://www.vpekh.com
  */
