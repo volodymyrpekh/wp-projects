@@ -1,6 +1,6 @@
 <?php
 /*
-  Plugin Name: Carify Custom Submission Fields (CP Job Manager Field Types)
+  Plugin Name: Carify CP Custom Field Types
   Plugin URI: 
   Description: This plugin creates additional custom fields for available spaces in submission form
   Version: 1.0.0
@@ -94,13 +94,6 @@ function getBetweenStr($string, $start, $end){
 	$len = strpos($string,$end,$ini) - $ini;
 	return substr($string,$ini,$len);
 }
-// add_filter( 'job_manager_get_posted_available_spaces_field', 'cp_save_field_type' );
-// function cp_save_field_type($key, $field) {
-	// echo '<!--';
-	// var_export($key);
-	// var_export($field);
-	// echo '-->';
-// }
 add_filter( 'field_editor_field_types', 'cp_add_field_type' );
 function cp_add_field_type($field_types){	
 	$field_types['available_spaces'] = __( 'Available Spaces', 'cp-job-manager-field-types' );	
@@ -119,7 +112,7 @@ function cp_submit_job_form_job_fields_end(){
 	$f=new WP_Job_Manager_Form_Submit_Job();
 	$job_id=$f->get_job_id();
 	if (!$job_id) {
-		$job_id= mysql_real_escape_string($_GET['job_id']);
+		$job_id=(int)$_GET['job_id'];
 	}
 	$val=get_post_meta($job_id, '_job_spaces',true);
 	$fields='<div id="description-c_all" style="margin-bottom: 32px;" class=""><small class="description">Available Spaces</small></div>';
@@ -131,17 +124,17 @@ function cp_submit_job_form_job_fields_end(){
 					<label for="child_openings" style="display:inline;">Openings</label>
 					<div class="field ">
 						<select name="job_spaces[child_openings][]" id="child_openings">
-							<option value="" '.selected($val[child_openings][$i],'',false).' >None</option>
-							<option value="1" '.selected($val[child_openings][$i],'1',false).' >1</option>
-							<option value="2" '.selected($val[child_openings][$i],'2',false).' >2</option>
-							<option value="3" '.selected($val[child_openings][$i],'3',false).' >3</option>
-							<option value="4" '.selected($val[child_openings][$i],'4',false).' >4</option>
-							<option value="5" '.selected($val[child_openings][$i],'5',false).' >5</option>
-							<option value="6" '.selected($val[child_openings][$i],'6',false).' >6</option>
-							<option value="7" '.selected($val[child_openings][$i],'7',false).' >7</option>
-							<option value="8" '.selected($val[child_openings][$i],'8',false).' >8</option>
-							<option value="9" '.selected($val[child_openings][$i],'9',false).' >9</option>
-							<option value="10" '.selected($val[child_openings][$i],'10',false).' >10</option>
+							<option value="" '.selected($val['child_openings'][$i],'',false).' >None</option>
+							<option value="1" '.selected($val['child_openings'][$i],'1',false).' >1</option>
+							<option value="2" '.selected($val['child_openings'][$i],'2',false).' >2</option>
+							<option value="3" '.selected($val['child_openings'][$i],'3',false).' >3</option>
+							<option value="4" '.selected($val['child_openings'][$i],'4',false).' >4</option>
+							<option value="5" '.selected($val['child_openings'][$i],'5',false).' >5</option>
+							<option value="6" '.selected($val['child_openings'][$i],'6',false).' >6</option>
+							<option value="7" '.selected($val['child_openings'][$i],'7',false).' >7</option>
+							<option value="8" '.selected($val['child_openings'][$i],'8',false).' >8</option>
+							<option value="9" '.selected($val['child_openings'][$i],'9',false).' >9</option>
+							<option value="10" '.selected($val['child_openings'][$i],'10',false).' >10</option>
 						</select>
 					</div>
 				</fieldset>
@@ -149,31 +142,31 @@ function cp_submit_job_form_job_fields_end(){
 					<label for="child_ages">Age Group</label>
 					<div class="field ">
 						<select name="job_spaces[child_ages][]" id="child_ages">
-							<option value="" '.selected($val[child_ages][$i],'',false).' >Any</option>
-							<option value="infant" '.selected($val[child_ages][$i],'infant',false).' >Infant</option>
-							<option value="toddler" '.selected($val[child_ages][$i],'toddler',false).' >Toddler</option>
-							<option value="preschool" '.selected($val[child_ages][$i],'preschool',false).' >Preschool</option>
-							<option value="kindergarten" '.selected($val[child_ages][$i],'kindergarten',false).' >Kindergarten</option>
-							<option value="schoolage" '.selected($val[child_ages][$i],'schoolage',false).' >School age</option>
+							<option value="" '.selected($val['child_ages'][$i],'',false).' >Any</option>
+							<option value="infant" '.selected($val['child_ages'][$i],'infant',false).' >Infant</option>
+							<option value="toddler" '.selected($val['child_ages'][$i],'toddler',false).' >Toddler</option>
+							<option value="preschool" '.selected($val['child_ages'][$i],'preschool',false).' >Preschool</option>
+							<option value="kindergarten" '.selected($val['child_ages'][$i],'kindergarten',false).' >Kindergarten</option>
+							<option value="schoolage" '.selected($val['child_ages'][$i],'schoolage',false).' >School age</option>
 						</select>
 					</div>
 				</fieldset>
 				<fieldset class="fieldset-child_startdate calendarfields">
 					<label for="child_startdate">Starting</label>
 					<div class="field ">
-						<input type="text" class="jmfe-date-picker input-text" name="job_spaces[child_startdate][]" id="child_startdate'.$y.'" placeholder="" value="'.$val[child_startdate][$i].'" maxlength="">
+						<input type="text" class="jmfe-date-picker input-text" name="job_spaces[child_startdate][]" id="child_startdate'.$y.'" placeholder="" value="'.$val['child_startdate'][$i].'" maxlength="">
 					</div>
 				</fieldset>
 				<fieldset class="fieldset-child_rates textfields">
 					<label for="child_rates">Rate per day</label>
 					<div class="field ">
-						<input type="text" class="input-text" name="job_spaces[child_rates][]" id="child_rates" title="" placeholder="" value="'.$val[child_rates][$i].'" maxlength="">
+						<input type="text" class="input-text" name="job_spaces[child_rates][]" id="child_rates" title="" placeholder="" value="'.$val['child_rates'][$i].'" maxlength="">
 					</div>
 				</fieldset>
 				<fieldset class="fieldset-child_notes textfields">
 					<label for="child_notes">Additional notes</label>
 					<div class="field ">
-						<input type="text" class="input-text" name="job_spaces[child_notes][]" id="child_notes" title="" placeholder="" value="'.$val[child_notes][$i].'" maxlength="">
+						<input type="text" class="input-text" name="job_spaces[child_notes][]" id="child_notes" title="" placeholder="" value="'.$val['child_notes'][$i].'" maxlength="">
 					</div>
 				</fieldset>
 				<span class="clearAll">Reset Fields</span>
