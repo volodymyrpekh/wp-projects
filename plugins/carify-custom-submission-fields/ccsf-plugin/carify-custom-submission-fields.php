@@ -3,7 +3,7 @@
   Plugin Name: Carify CP Custom Field Types
   Plugin URI: 
   Description: This plugin creates additional custom fields for available spaces in submission form
-  Version: 1.0.1
+  Version: 1.0.2
   Author: Vlad Pekh
   Author URI: http://www.vpekh.com
  */
@@ -15,6 +15,7 @@ function cp_add_available_places_metabox(){
 function cp_available_places_location(){
 	global $post;
 	$val=get_post_meta($post->ID, '_job_spaces',true);
+    if (!$val) $val=array('child_openings'=>array());
 	$fields='<!--'.var_export($val,true).'-->';
 	$fields='<style>.tab-wrapper fieldset{width:20%;}.tab-wrapper fieldset{min-height:50px !important;}.tab-wrapper{padding:10px 10px 10px;display:block;opacity:1;margin:0;}div[id*="c_tab"]::before, div[id*="c_all"]::before {content:"";}</style>';
 	$fields.='<script>$(document).ready(function() {jQuery(".jmfe-date-picker").each(function(){
@@ -37,17 +38,17 @@ function cp_available_places_location(){
 					<label for="child_openings" style="display:inline;">Openings</label>
 					<div class="field " style="width: 90%;">
 						<select name="job_spaces[child_openings][]" id="child_openings">
-							<option value="" '.selected($val[child_openings][$i],'',false).' >None</option>
-							<option value="1" '.selected($val[child_openings][$i],'1',false).' >1</option>
-							<option value="2" '.selected($val[child_openings][$i],'2',false).' >2</option>
-							<option value="3" '.selected($val[child_openings][$i],'3',false).' >3</option>
-							<option value="4" '.selected($val[child_openings][$i],'4',false).' >4</option>
-							<option value="5" '.selected($val[child_openings][$i],'5',false).' >5</option>
-							<option value="6" '.selected($val[child_openings][$i],'6',false).' >6</option>
-							<option value="7" '.selected($val[child_openings][$i],'7',false).' >7</option>
-							<option value="8" '.selected($val[child_openings][$i],'8',false).' >8</option>
-							<option value="9" '.selected($val[child_openings][$i],'9',false).' >9</option>
-							<option value="10" '.selected($val[child_openings][$i],'10',false).' >10</option>
+							<option value="" '.selected($val['child_openings'][$i],'',false).' >None</option>
+							<option value="1" '.selected($val['child_openings'][$i],'1',false).' >1</option>
+							<option value="2" '.selected($val['child_openings'][$i],'2',false).' >2</option>
+							<option value="3" '.selected($val['child_openings'][$i],'3',false).' >3</option>
+							<option value="4" '.selected($val['child_openings'][$i],'4',false).' >4</option>
+							<option value="5" '.selected($val['child_openings'][$i],'5',false).' >5</option>
+							<option value="6" '.selected($val['child_openings'][$i],'6',false).' >6</option>
+							<option value="7" '.selected($val['child_openings'][$i],'7',false).' >7</option>
+							<option value="8" '.selected($val['child_openings'][$i],'8',false).' >8</option>
+							<option value="9" '.selected($val['child_openings'][$i],'9',false).' >9</option>
+							<option value="10" '.selected($val['child_openings'][$i],'10',false).' >10</option>
 						</select>
 					</div>
 				</fieldset>
@@ -115,6 +116,7 @@ function cp_submit_job_form_job_fields_end(){
 		$job_id=(int)$_GET['job_id'];
 	}
 	$val=get_post_meta($job_id, '_job_spaces',true);
+    if (!$val) $val=array('child_openings'=>array());
 	$fields='<div id="description-c_all" style="margin-bottom: 32px;" class=""><small class="description">Available Spaces</small></div>';
 	for($y=1;$y<=5;$y++){
 		$i=$y-1;
@@ -233,7 +235,14 @@ class Available_Places_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		global $post;
 		$val=get_post_meta($post->ID, '_job_spaces',true);
-		if (!!$val){
+        $is_set=false;
+        if ( is_array($val))
+            foreach ($val as $k=>$v){
+                foreach ($v as $e){
+                    $is_set=($is_set||(!!$e));
+                }
+            }
+		if (!!$val && $is_set){
 			echo $args['before_widget'];
 			if ( ! empty( $instance['title'] ) ) {
 				echo $args['before_title'] .'<i class="ion-android-contacts"></i>&nbsp;&nbsp;'. apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
