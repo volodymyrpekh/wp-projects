@@ -197,7 +197,7 @@ function my_enqueue() {
 	$myStyleUrl = plugins_url( 'ccsf.css', __FILE__ );
 	wp_register_style('myStyleSheets', $myStyleUrl);
 	wp_enqueue_style( 'myStyleSheets');
-	wp_enqueue_style('jquery-style', 'https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css');
+	wp_enqueue_style('jquery-style', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css');
     //wp_enqueue_script( 'my_custom_script', plugin_dir_url( __FILE__ ) . 'myscript.js' );
 }
 add_action( 'admin_enqueue_scripts', 'my_enqueue' );
@@ -209,7 +209,7 @@ function cp_add_my_stylesheet() {
 	$myStyleUrl = plugins_url( 'ccsf.css', __FILE__ );
 	wp_register_style('myStyleSheets', $myStyleUrl);
 	wp_enqueue_style( 'myStyleSheets');
-	wp_enqueue_style('jquery-style', 'https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css');
+	wp_enqueue_style('jquery-style', 'https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css');
 }
 class Available_Places_Widget extends WP_Widget {
 
